@@ -26,6 +26,7 @@ export const NavItem = styled.span<{ isActive: boolean }>`
   text-decoration: none;
   color: #333;
   font-weight: 500;
+  font-size: 18px;
 
   &:hover {
     color: #0C8948;
