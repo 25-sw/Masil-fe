@@ -1,22 +1,23 @@
 import * as S from './style'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 export default function Header() {
   const isLoggedIn = true;
   const name = '홍길동';
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const moveToHome = () => {
-    navigate('/');
+  const isActive = (path: string) => {
+    return location.pathname === path || location.pathname.startsWith(path + '/');
   }
 
   return (
     <S.HeaderContainer>
-      <S.Logo src="/logo.svg" alt="Logo" onClick={moveToHome} />
+      <S.Logo src="/logo.svg" alt="Logo" onClick={() => navigate('/')} />
       <S.NavList>
-        <S.NavItem href="/create">AI 제작</S.NavItem>
-        <S.NavItem href="/announcement">공고</S.NavItem>
-        <S.NavItem href="/my">내 가게</S.NavItem>
+        <S.NavItem onClick={() => navigate('/create')} isActive={isActive('/create')}>AI 제작</S.NavItem>
+        <S.NavItem onClick={() => navigate('/announcement')} isActive={isActive('/announcement')}>공고</S.NavItem>
+        <S.NavItem onClick={() => navigate('/my')} isActive={isActive('/my')}>내 가게</S.NavItem>
       </S.NavList>
       {isLoggedIn ? (
         <S.UserWrapper>

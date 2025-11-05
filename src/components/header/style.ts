@@ -22,14 +22,21 @@ export const NavList = styled.ul`
   list-style: none;
 `;
 
-export const NavItem = styled.a`
+export const NavItem = styled.span<{ isActive: boolean }>`
   text-decoration: none;
   color: #333;
   font-weight: 500;
 
   &:hover {
     color: #0C8948;
+    cursor: pointer;
   }
+
+  ${({ isActive }) =>
+    isActive &&
+    `
+    color: #0C8948;
+  `}
 `;
 
 export const LoginButton = styled.button`
