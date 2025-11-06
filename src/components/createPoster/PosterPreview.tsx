@@ -1,6 +1,5 @@
 import * as S from "@/pages/createPoster/style";
 import posterImage from "@/assets/poster.svg";
-import instaImg from "@/assets/instaImg.svg";
 import type { DisplayMode, PosterState } from "@/types/types";
 import type { RefObject } from "react";
 
@@ -13,6 +12,8 @@ type Props = {
   snsImgRef: RefObject<HTMLImageElement | null>;
   onSuggestClick: () => void;
   posterSrc?: string;
+  posterTitle?: string;
+  posterSubtitle?: string;
 };
 
 export function PosterPreview({
@@ -24,6 +25,8 @@ export function PosterPreview({
   snsImgRef,
   onSuggestClick,
   posterSrc,
+  posterTitle,
+  posterSubtitle,
 }: Props) {
   const isSNS = displayMode === "sns";
   const posterSrcToUse = posterSrc ?? posterImage;
@@ -48,7 +51,39 @@ export function PosterPreview({
             {posterState === "loading" && <S.SkeletonOverlay />}
           </>
         ) : (
-          <S.PosterImage ref={snsImgRef} src={instaImg} alt="SNS 미리보기" />
+          <S.InstagramFeed>
+            <S.FeedHeader>
+              <S.UserInfo>
+                <S.UserAvatar>👤</S.UserAvatar>
+                <S.UserNameText>UserName</S.UserNameText>
+              </S.UserInfo>
+              <S.MoreButton>⋮</S.MoreButton>
+            </S.FeedHeader>
+
+            <S.FeedImageContainer>
+              <S.FeedImage
+                ref={snsImgRef}
+                src={posterSrcToUse}
+                alt="SNS 미리보기"
+              />
+            </S.FeedImageContainer>
+
+            <S.ActionBar>
+              <S.ActionLeft>
+                <S.ActionIcon>♡</S.ActionIcon>
+                <S.ActionIcon>💬</S.ActionIcon>
+                <S.ActionIcon>✈</S.ActionIcon>
+              </S.ActionLeft>
+            </S.ActionBar>
+
+            {(posterTitle || posterSubtitle) && (
+              <S.Caption>
+                <S.CaptionUser>UserName</S.CaptionUser>
+                {posterTitle && <S.CaptionTitle>{posterTitle}</S.CaptionTitle>}
+                {posterSubtitle && <S.CaptionSubtitle>{posterSubtitle}</S.CaptionSubtitle>}
+              </S.Caption>
+            )}
+          </S.InstagramFeed>
         )}
         <S.SuggestionButton
           type="button"

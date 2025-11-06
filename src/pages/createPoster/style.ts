@@ -374,3 +374,140 @@ export const SizeOption = styled.button<{ active?: boolean }>`
     box-shadow: 0 0 0 2px rgba(12, 137, 72, 0.12) inset;
   }
 `;
+
+// Instagram Feed Styles
+export const InstagramFeed = styled.div`
+  width: 100%;
+  max-width: 468px;
+  background: white;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+`;
+
+export const FeedHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid #efefef;
+`;
+
+export const UserInfo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const UserAvatar = styled.div`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  border: 2px solid white;
+  box-shadow: 0 0 0 1px #dbdbdb;
+`;
+
+export const UserNameText = styled.span`
+  font-size: 14px;
+  font-weight: 600;
+  color: #262626;
+`;
+
+export const MoreButton = styled.button`
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #262626;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
+export const FeedImageContainer = styled.div`
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+`;
+
+export const FeedImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+export const ActionBar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+`;
+
+export const ActionLeft = styled.div`
+  display: flex;
+  gap: 16px;
+`;
+
+export const ActionIcon = styled.button`
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.6;
+  }
+`;
+
+export const Caption = styled.div`
+  padding: 0 16px 16px;
+`;
+
+export const CaptionUser = styled.span`
+  font-size: 14px;
+  font-weight: 600;
+  color: #262626;
+`;
+
+export const CaptionText = styled.span`
+  font-size: 14px;
+  color: #262626;
+  line-height: 1.5;
+  margin-left: 6px;
+`;
+
+export const CaptionTitle = styled.div`
+  font-size: 14px;
+  color: #262626;
+  line-height: 1.5;
+  margin-top: 4px;
+  font-weight: 500;
+`;
+
+export const CaptionSubtitle = styled.div`
+  font-size: 14px;
+  color: #737373;
+  line-height: 1.5;
+  margin-top: 2px;
+`;
