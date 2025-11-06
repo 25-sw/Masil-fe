@@ -1,19 +1,21 @@
-import * as S from './style';
+import * as S from "./style";
+import { useNavigate } from "react-router-dom";
 
 export default function Create() {
+  const navigate = useNavigate();
   const posters = [
-    '/posters/poster1.png',
-    '/posters/poster2.png',
-    '/posters/poster3.png',
-    '/posters/poster4.png',
-    '/posters/poster5.png',
-    '/posters/poster6.png',
-    '/posters/poster7.png',
+    "/posters/poster1.png",
+    "/posters/poster2.png",
+    "/posters/poster3.png",
+    "/posters/poster4.png",
+    "/posters/poster5.png",
+    "/posters/poster6.png",
+    "/posters/poster7.png",
   ];
 
   const handleNext = () => {
-    // 여기에 코드 짜면 될 듯
-  }
+    navigate("/createPoster");
+  };
 
   return (
     <S.Wrapper>
