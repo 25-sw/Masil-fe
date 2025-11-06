@@ -115,6 +115,13 @@ export const AnnouncementGrid = styled.div`
   }
 `;
 
+export const MessageWrapper = styled.div`
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  color: #6b7280;
+`;
+
 export const AnnouncementCardWrapper = styled.div`
   width: 250px;
   height: 140px;

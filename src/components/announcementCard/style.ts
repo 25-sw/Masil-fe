@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const CardContainer = styled.div`
+export const CardContainer = styled.div<{ clickable?: boolean }>`
   border: 2px solid #F3F4F6;
   border-radius: 10px;
   padding: 15px;
@@ -9,6 +9,19 @@ export const CardContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   background: white;
+  cursor: ${({ clickable }) => (clickable ? 'pointer' : 'default')};
+  opacity: ${({ clickable }) => (clickable ? 1 : 0.7)};
+  transition: all 0.2s ease;
+
+  ${({ clickable }) =>
+    clickable &&
+    `
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-color: #0c8948;
+    }
+  `}
 `;
 
 export const CardTitle = styled.h4`

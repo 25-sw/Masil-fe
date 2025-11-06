@@ -156,15 +156,15 @@ export default function Announcement() {
           {currentData.map((announcement, index) => (
             <AnnouncementCard
               key={announcement.pbancSn || announcement.pbancId || index}
-              title={announcement.pbancNm}
-              period={announcement.aplyPd}
-              categories={announcement.rcrtTypeCdNm.split('/')}
+              pbancSn={announcement.pbancSn}
+              pbancId={announcement.pbancId}
+              title={announcement.pbancNm || '제목 없음'}
+              period={announcement.aplyPd || '접수기간 미정'}
+              categories={announcement.rcrtTypeCdNm?.split('/').filter(Boolean) || []}
             />
           ))}
         </S.CardGrid>
-      )}
-
-      {TOTAL_PAGES > 0 && (
+      )}      {TOTAL_PAGES > 0 && (
         <S.Pagination>
           <S.PageArrow
             onClick={() => handlePageChange(currentPage - 1)}
