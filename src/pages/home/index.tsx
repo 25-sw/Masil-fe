@@ -44,15 +44,15 @@ export default function Home() {
           <S.SectionTitle>지금 어떤 혜택을 받을 수 있는지 알아보세요!</S.SectionTitle>
           {isLoading ? (
             <S.AnnouncementGrid>
-              <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '2rem', color: '#6b7280' }}>
+              <S.MessageWrapper>
                 공고를 불러오는 중...
-              </div>
+              </S.MessageWrapper>
             </S.AnnouncementGrid>
           ) : recentAnnouncements.length === 0 ? (
             <S.AnnouncementGrid>
-              <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '2rem', color: '#6b7280' }}>
+              <S.MessageWrapper>
                 등록된 공고가 없습니다.
-              </div>
+              </S.MessageWrapper>
             </S.AnnouncementGrid>
           ) : (
             <S.AnnouncementGrid>
