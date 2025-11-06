@@ -1,9 +1,10 @@
 import * as S from './style';
 import { useNavigate } from 'react-router-dom';
 import { useAnnouncements } from '@/hooks/useAnnouncements';
+import { useAuthStore } from '@/store/authStore';
 
 export default function Home() {
-  const userName = '유정';
+  const id = useAuthStore((state) => state.accountId);
   const navigate = useNavigate();
 
   const { data: announcements = [], isLoading } = useAnnouncements({});
@@ -28,7 +29,7 @@ export default function Home() {
         </S.HeroBackground>
         <S.HeroContent>
           <S.HeroTitle>
-            {userName}님의 가게, <span>AI가 예쁘게 제작해 드릴게요</span>
+            {id}님의 가게, <span>AI가 예쁘게 제작해 드릴게요</span>
           </S.HeroTitle>
           <S.HeroSubtitle>가게의 이야기를 담아 포스터로 제작해드려요</S.HeroSubtitle>
           <S.CreateButton onClick={moveToCreatePoster}>
