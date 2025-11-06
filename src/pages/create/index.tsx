@@ -1,17 +1,10 @@
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
+import { useMyPosters } from "@/hooks/usePoster";
 
 export default function Create() {
   const navigate = useNavigate();
-  const posters = [
-    "/posters/poster1.png",
-    "/posters/poster2.png",
-    "/posters/poster3.png",
-    "/posters/poster4.png",
-    "/posters/poster5.png",
-    "/posters/poster6.png",
-    "/posters/poster7.png",
-  ];
+  const { data: myPosters = [] } = useMyPosters();
 
   const handleNext = () => {
     navigate("/createPoster");
@@ -30,13 +23,13 @@ export default function Create() {
           <S.PlusIcon>+</S.PlusIcon>
         </S.AddPosterCard>
 
-        {posters.map((poster, index) => (
+        {myPosters.map((poster) => (
           <S.PosterCard
-            key={index}
-            onClick={() => handleSelectPoster(poster)}
+            key={poster.id}
+            onClick={() => handleSelectPoster(poster.fileName)}
             style={{ cursor: "pointer" }}
           >
-            <img src={poster} alt={`포스터 ${index + 1}`} />
+            <img src={poster.fileName} alt={`포스터 ${poster.id}`} />
           </S.PosterCard>
         ))}
       </S.PosterGrid>
