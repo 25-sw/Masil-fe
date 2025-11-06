@@ -1,19 +1,25 @@
-import * as S from './style';
+import * as S from "./style";
+import { useNavigate } from "react-router-dom";
 
 export default function Create() {
+  const navigate = useNavigate();
   const posters = [
-    '/posters/poster1.png',
-    '/posters/poster2.png',
-    '/posters/poster3.png',
-    '/posters/poster4.png',
-    '/posters/poster5.png',
-    '/posters/poster6.png',
-    '/posters/poster7.png',
+    "/posters/poster1.png",
+    "/posters/poster2.png",
+    "/posters/poster3.png",
+    "/posters/poster4.png",
+    "/posters/poster5.png",
+    "/posters/poster6.png",
+    "/posters/poster7.png",
   ];
 
   const handleNext = () => {
-    // 여기에 코드 짜면 될 듯
-  }
+    navigate("/createPoster");
+  };
+
+  const handleSelectPoster = (posterSrc: string) => {
+    navigate("/createPoster", { state: { posterSrc } });
+  };
 
   return (
     <S.Wrapper>
@@ -25,7 +31,11 @@ export default function Create() {
         </S.AddPosterCard>
 
         {posters.map((poster, index) => (
-          <S.PosterCard key={index}>
+          <S.PosterCard
+            key={index}
+            onClick={() => handleSelectPoster(poster)}
+            style={{ cursor: "pointer" }}
+          >
             <img src={poster} alt={`포스터 ${index + 1}`} />
           </S.PosterCard>
         ))}
