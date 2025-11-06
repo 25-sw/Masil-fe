@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Home from '@/pages/home';
+import Announcement from '@/pages/announcement';
 import Header from './components/header';
 import Create from '@/pages/create';
 
@@ -11,8 +12,8 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/announcement" element={<Announcement />} />
         <Route path="/create" element={<Create />} />
-        <Route path="/announcement" element={<div>공고</div>} />
         <Route path="/my" element={<div>내 가게</div>} />
         <Route path="*" element={<div>Not found</div>} />
       </Routes>
