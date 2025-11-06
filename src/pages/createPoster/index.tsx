@@ -84,7 +84,6 @@ export default function Create() {
     if (messages.length === 0) {
       setMessages([{ id: Date.now(), type: "ai", content: QUESTIONS[0] }]);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
