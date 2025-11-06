@@ -2,18 +2,14 @@ import * as S from './style';
 import { useNavigate } from 'react-router-dom';
 import { useAnnouncements } from '@/hooks/useAnnouncements';
 import { useAuthStore } from '@/store/authStore';
+import { useMyPosters } from '@/hooks/usePoster';
 
 export default function Home() {
   const id = useAuthStore((state) => state.accountId);
   const navigate = useNavigate();
 
   const { data: announcements = [], isLoading } = useAnnouncements({});
-
-  const posters = [
-    '/posters/poster1.png',
-    '/posters/poster2.png',
-    '/posters/poster3.png',
-  ];
+  const { data: myPosters = [] } = useMyPosters();
 
   const moveToCreatePoster = () => {
     navigate('/create');
@@ -74,9 +70,9 @@ export default function Home() {
         <S.PosterSection>
           <S.PosterSectionTitle>내 포스터</S.PosterSectionTitle>
           <S.PosterGrid>
-            {posters.map((poster, index) => (
-              <S.PosterCard key={index}>
-                <img src={poster} alt={`포스터 ${index + 1}`} />
+            {myPosters.slice(0, 3).map((poster) => (
+              <S.PosterCard key={poster.id}>
+                <img src={poster.fileName} alt={`포스터 ${poster.id}`} />
               </S.PosterCard>
             ))}
             <S.AddPosterCard onClick={moveToCreatePoster}>

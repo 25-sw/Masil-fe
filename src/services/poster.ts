@@ -13,6 +13,11 @@ export interface GeneratePosterResponse {
   url: string;
 }
 
+export interface PosterListItem {
+  id: string;
+  fileName: string;
+}
+
 export async function generatePoster(data: GeneratePosterRequest) {
   const response = await customAxios.post<GeneratePosterResponse>(
     '/posters',
@@ -21,5 +26,10 @@ export async function generatePoster(data: GeneratePosterRequest) {
       timeout: 60000,
     }
   );
+  return response.data;
+}
+
+export async function getMyPosters() {
+  const response = await customAxios.get<PosterListItem[]>('/posters');
   return response.data;
 }
