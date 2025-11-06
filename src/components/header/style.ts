@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const HeaderContainer = styled.header`
-  padding: 1rem 4rem;
+  padding: 1rem 6.5rem;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;

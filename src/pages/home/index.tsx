@@ -53,7 +53,7 @@ export default function Home() {
     <S.Wrapper>
       <S.HeroSection>
         <S.HeroBackground>
-          <img src="/backgrounds/mainBackground.svg" alt="" />
+          <img src="/backgrounds/mainBg.png" alt="" />
         </S.HeroBackground>
         <S.HeroContent>
           <S.HeroTitle>
