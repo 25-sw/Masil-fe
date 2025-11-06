@@ -309,6 +309,10 @@ export const SendButton = styled.button`
 `;
 
 export const SuggestionButton = styled.button`
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 4;
   width: 133px;
   height: 45px;
   border: none;
@@ -323,8 +327,6 @@ export const SuggestionButton = styled.button`
   font-weight: 600;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  margin-top: 12px;
-  align-self: flex-end;
 
   &:hover {
     filter: brightness(0.95);
@@ -335,4 +337,40 @@ export const PosterColumn = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+`;
+
+export const SizePanel = styled.div<{ visible?: boolean }>`
+  position: absolute;
+  left: 150px;
+  top: 280px;
+  width: 91px;
+  height: 218px;
+  border-radius: 10px;
+  background: #d9d9d9;
+  padding: 11px 9px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: ${({ visible }) => (visible ? "flex" : "none")};
+  flex-direction: column;
+  gap: 11px;
+  z-index: 20;
+`;
+
+export const SizeOption = styled.button<{ active?: boolean }>`
+  width: 73px;
+  height: 58px;
+  border-radius: 10px;
+  background: #fff;
+  border: ${({ active }) =>
+    active ? "2px solid #0c8948" : "1px solid #e5e5e5"};
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 0 0 2px rgba(12, 137, 72, 0.12) inset;
+  }
 `;

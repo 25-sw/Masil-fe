@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as S from "./style";
 import { Sidebar } from "@/components/createPoster/Sidebar";
@@ -12,11 +13,19 @@ import type {
   PosterState,
 } from "../../types/types";
 
+type LocationState = { posterSrc?: string } | null;
+
 export default function Create() {
+  const location = useLocation();
+  const initialPosterSrc = (location.state as LocationState)?.posterSrc;
+  const [presetPosterSrc] = useState<string | undefined>(initialPosterSrc);
+  const hasPreset = !!presetPosterSrc;
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [activeMenu, setActiveMenu] = useState<MenuKey>("ai");
-  const [posterState, setPosterState] = useState<PosterState>("locked");
+  const [posterState, setPosterState] = useState<PosterState>(
+    hasPreset ? "ready" : "locked"
+  );
   const [displayMode, setDisplayMode] = useState<DisplayMode>("poster");
 
   const posterImgRef = useRef<HTMLImageElement | null>(null);
@@ -24,7 +33,7 @@ export default function Create() {
   const messagesWrapperRef = useRef<HTMLDivElement | null>(null);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [sizeKey] = useState<keyof typeof SIZE_PRESETS>("poster");
+  const [sizeKey, setSizeKey] = useState<keyof typeof SIZE_PRESETS>("poster");
   const { w: canvasW, h: canvasH } = SIZE_PRESETS[sizeKey];
 
   const handleSuggestClick = () => {
@@ -75,13 +84,13 @@ export default function Create() {
         setPosterState("loading");
         setTimeout(() => setPosterState("ready"), 5000);
       }
-    }, 400);
+    }, 1000);
 
     setInputValue("");
   };
 
   useEffect(() => {
-    if (messages.length === 0) {
+    if (!hasPreset && messages.length === 0) {
       setMessages([{ id: Date.now(), type: "ai", content: QUESTIONS[0] }]);
     }
   }, []);
@@ -132,9 +141,33 @@ export default function Create() {
     }
   };
 
+  const handleSizeSelect = (key: keyof typeof SIZE_PRESETS) => {
+    setSizeKey(key);
+  };
+
   return (
     <S.Container>
       <Sidebar activeMenu={activeMenu} onMenuClick={handleMenuClick} />
+      <S.SizePanel visible={activeMenu === "size"}>
+        <S.SizeOption
+          active={sizeKey === "16x9"}
+          onClick={() => handleSizeSelect("16x9")}
+        >
+          16:9
+        </S.SizeOption>
+        <S.SizeOption
+          active={sizeKey === "4x5"}
+          onClick={() => handleSizeSelect("4x5")}
+        >
+          4:5
+        </S.SizeOption>
+        <S.SizeOption
+          active={sizeKey === "a4" || sizeKey === "poster"}
+          onClick={() => handleSizeSelect("a4")}
+        >
+          A4
+        </S.SizeOption>
+      </S.SizePanel>
       <S.MainContent>
         <S.ChatContainer>
           <ChatPanel
@@ -154,6 +187,7 @@ export default function Create() {
           posterImgRef={posterImgRef}
           snsImgRef={snsImgRef}
           onSuggestClick={handleSuggestClick}
+          posterSrc={presetPosterSrc}
         />
       </S.MainContent>
     </S.Container>
