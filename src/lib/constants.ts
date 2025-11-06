@@ -12,4 +12,6 @@ export const SIZE_PRESETS: Record<
   poster: { label: "포스터(기본)", w: 465, h: 657 },
   square: { label: "1:1", w: 657, h: 657 },
   "4x5": { label: "4:5", w: 526, h: 657 },
+  "16x9": { label: "16:9", w: 657, h: 369 },
+  a4: { label: "A4", w: 465, h: 657 },
 };
