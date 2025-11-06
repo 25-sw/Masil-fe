@@ -6,6 +6,7 @@ import Announcement from "@/pages/announcement";
 import Header from "./components/header";
 import Create from "@/pages/create";
 import CreatePoster from "@/pages/createPoster";
+import My from './pages/my';
 
 export default function App() {
   return (
@@ -16,7 +17,7 @@ export default function App() {
         <Route path="/announcement" element={<Announcement />} />
         <Route path="/create" element={<Create />} />
         <Route path="/createPoster" element={<CreatePoster />} />
-        <Route path="/my" element={<div>내 가게</div>} />
+        <Route path="/my" element={<My />} />
         <Route path="*" element={<div>Not found</div>} />
       </Routes>
       <ToastContainer
