@@ -54,8 +54,24 @@ export const DropdownMenu = styled.div`
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   min-width: 120px;
+  max-width: 250px;
+  max-height: 300px;
+  overflow-y: auto;
   z-index: 10;
-  overflow: hidden;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #d7d7d7;
+    border-radius: 3px;
+  }
 `;
 
 export const DropdownItem = styled.div`
@@ -79,7 +95,7 @@ export const Divider = styled.div`
 
 export const CardGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 250px);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 28px 21px;
   margin-bottom: 60px;
 `;

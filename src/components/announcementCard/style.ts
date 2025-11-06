@@ -18,6 +18,7 @@ export const CardTitle = styled.h4`
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const CardDate = styled.p`

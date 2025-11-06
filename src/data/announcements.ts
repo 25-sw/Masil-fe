@@ -1,18 +1,5 @@
-export interface Announcement {
-  id: number;
-  title: string;
-  period: string;
-  organization: string; // 소관기관
-  region: string; // 지역
-  experience: string; // 업력
-  industry: string; // 업종
-  categories: string[];
-}
-
-const organizations = ['중소벤처기업부', '서울시', '경기도', '광주시', '부산시', '대구시'];
-const regions = ['서울', '경기', '인천', '광주', '부산', '대구', '대전', '울산'];
-const experiences = ['3년 미만', '3년 이상', '5년 이상', '7년 이상', '10년 이상'];
-const industries = ['음식점업', '도소매업', '제조업', '서비스업', '숙박업', 'IT업'];
+import type { Announcement } from '@/types/announcement';
+import { Region, RelatedInstitution, IndustryType, SupportTarget } from '@/types/announcement';
 
 const titles = [
   '광주투자액셀러레이팅(G-IN Next Level) 11기 참여 모집',
@@ -73,17 +60,23 @@ export const mockAnnouncements: Announcement[] = Array.from({ length: 100 }, (_,
   const endMonth = String(Math.floor(Math.random() * 12) + 1).padStart(2, '0');
   const endDay = String(Math.floor(Math.random() * 28) + 1).padStart(2, '0');
 
+  const organizations = Object.values(RelatedInstitution);
+  const regions = Object.values(Region);
+  const industries = Object.values(IndustryType);
+  const supportTargets = Object.values(SupportTarget);
+
   const org = organizations[Math.floor(Math.random() * organizations.length)];
   const region = regions[Math.floor(Math.random() * regions.length)];
-  const exp = experiences[Math.floor(Math.random() * experiences.length)];
   const ind = industries[Math.floor(Math.random() * industries.length)];
 
-  const categoryPool = ['소상공인', '예비창업자', '청년창업', '여성창업'];
-  const numCategories = Math.floor(Math.random() * 2) + 1;
-  const categories = Array.from(
-    { length: numCategories },
-    () => categoryPool[Math.floor(Math.random() * categoryPool.length)]
-  ).filter((v, i, a) => a.indexOf(v) === i);
+  const numCategories = Math.floor(Math.random() * 3) + 1;
+  const categories: SupportTarget[] = [];
+  for (let j = 0; j < numCategories; j++) {
+    const target = supportTargets[Math.floor(Math.random() * supportTargets.length)];
+    if (!categories.includes(target)) {
+      categories.push(target);
+    }
+  }
 
   return {
     id: i + 1,
@@ -91,7 +84,6 @@ export const mockAnnouncements: Announcement[] = Array.from({ length: 100 }, (_,
     period: `접수 기간 2025.${startMonth}.${startDay}.~2025.${endMonth}.${endDay}.`,
     organization: org,
     region: region,
-    experience: exp,
     industry: ind,
     categories: categories,
   };

@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import * as S from './style';
 import AnnouncementCard from '@/components/announcementCard';
 import { mockAnnouncements } from '@/data/announcements';
+import { Region, RelatedInstitution, IndustryType, SupportTarget } from '@/types/announcement';
 
 export default function Announcement() {
   const ITEMS_PER_PAGE = 20;
@@ -9,25 +10,25 @@ export default function Announcement() {
   const [currentPage, setCurrentPage] = useState(1);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
-  const [selectedOrg, setSelectedOrg] = useState<string | null>(null);
-  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
-  const [selectedExp, setSelectedExp] = useState<string | null>(null);
-  const [selectedIndustry, setSelectedIndustry] = useState<string | null>(null);
+  const [selectedOrg, setSelectedOrg] = useState<RelatedInstitution | null>(null);
+  const [selectedRegion, setSelectedRegion] = useState<Region | null>(null);
+  const [selectedIndustry, setSelectedIndustry] = useState<IndustryType | null>(null);
+  const [selectedTarget, setSelectedTarget] = useState<SupportTarget | null>(null);
 
-  const organizations = Array.from(new Set(mockAnnouncements.map(a => a.organization)));
-  const regions = Array.from(new Set(mockAnnouncements.map(a => a.region)));
-  const experiences = Array.from(new Set(mockAnnouncements.map(a => a.experience)));
-  const industries = Array.from(new Set(mockAnnouncements.map(a => a.industry)));
+  const organizations = Object.values(RelatedInstitution);
+  const regions = Object.values(Region);
+  const industries = Object.values(IndustryType);
+  const targets = Object.values(SupportTarget);
 
   const filteredData = useMemo(() => {
     return mockAnnouncements.filter(item => {
       if (selectedOrg && item.organization !== selectedOrg) return false;
       if (selectedRegion && item.region !== selectedRegion) return false;
-      if (selectedExp && item.experience !== selectedExp) return false;
       if (selectedIndustry && item.industry !== selectedIndustry) return false;
+      if (selectedTarget && !item.categories.includes(selectedTarget)) return false;
       return true;
     });
-  }, [selectedOrg, selectedRegion, selectedExp, selectedIndustry]);
+  }, [selectedOrg, selectedRegion, selectedIndustry, selectedTarget]);
 
   const TOTAL_PAGES = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
 
@@ -55,23 +56,23 @@ export default function Announcement() {
   };
 
   const handleFilterChange = (
-    type: 'org' | 'region' | 'exp' | 'industry',
+    type: 'org' | 'region' | 'industry' | 'target',
     value: string | null
   ) => {
     setCurrentPage(1);
     setOpenDropdown(null);
     switch (type) {
       case 'org':
-        setSelectedOrg(value);
+        setSelectedOrg(value as RelatedInstitution | null);
         break;
       case 'region':
-        setSelectedRegion(value);
-        break;
-      case 'exp':
-        setSelectedExp(value);
+        setSelectedRegion(value as Region | null);
         break;
       case 'industry':
-        setSelectedIndustry(value);
+        setSelectedIndustry(value as IndustryType | null);
+        break;
+      case 'target':
+        setSelectedTarget(value as SupportTarget | null);
         break;
     }
   };
@@ -83,8 +84,8 @@ export default function Announcement() {
   const filters = [
     { type: 'org' as const, label: '소관기관', selected: selectedOrg, options: organizations },
     { type: 'region' as const, label: '지역', selected: selectedRegion, options: regions },
-    { type: 'exp' as const, label: '업력', selected: selectedExp, options: experiences },
     { type: 'industry' as const, label: '업종', selected: selectedIndustry, options: industries },
+    { type: 'target' as const, label: '지원대상', selected: selectedTarget, options: targets },
   ];
 
   return (
