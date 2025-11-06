@@ -95,9 +95,30 @@ export const Divider = styled.div`
 
 export const CardGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 28px 21px;
-  margin-bottom: 60px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+`;
+
+export const LoadingMessage = styled.div`
+  text-align: center;
+  padding: 4rem 0;
+  font-size: 1.2rem;
+  color: #666;
+`;
+
+export const ErrorMessage = styled.div`
+  text-align: center;
+  padding: 4rem 0;
+  font-size: 1.2rem;
+  color: #ef4444;
+`;
+
+export const EmptyMessage = styled.div`
+  text-align: center;
+  padding: 4rem 0;
+  font-size: 1.2rem;
+  color: #999;
 `;
 
 export const Pagination = styled.div`

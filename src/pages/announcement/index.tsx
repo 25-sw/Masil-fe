@@ -1,8 +1,14 @@
 import { useState, useMemo } from 'react';
 import * as S from './style';
 import AnnouncementCard from '@/components/announcementCard';
-import { mockAnnouncements } from '@/data/announcements';
 import { Region, RelatedInstitution, IndustryType, SupportTarget } from '@/types/announcement';
+import { useAnnouncements } from '@/hooks/useAnnouncements';
+import {
+  RegionToAPI,
+  RelatedInstitutionToAPI,
+  IndustryTypeToAPI,
+  SupportTargetToAPI,
+} from '@/lib/enumMapper';
 
 export default function Announcement() {
   const ITEMS_PER_PAGE = 20;
@@ -20,15 +26,35 @@ export default function Announcement() {
   const industries = Object.values(IndustryType);
   const targets = Object.values(SupportTarget);
 
-  const filteredData = useMemo(() => {
-    return mockAnnouncements.filter(item => {
-      if (selectedOrg && item.organization !== selectedOrg) return false;
-      if (selectedRegion && item.region !== selectedRegion) return false;
-      if (selectedIndustry && item.industry !== selectedIndustry) return false;
-      if (selectedTarget && !item.categories.includes(selectedTarget)) return false;
-      return true;
-    });
+  const apiParams = useMemo(() => {
+    const params: {
+      industryList?: string[];
+      regionList?: string[];
+      relatedInstitutionList?: string[];
+      supportTargetList?: string[];
+    } = {};
+
+    if (selectedIndustry) {
+      params.industryList = [IndustryTypeToAPI[selectedIndustry]];
+    }
+    if (selectedRegion) {
+      params.regionList = [RegionToAPI[selectedRegion]];
+    }
+    if (selectedOrg) {
+      params.relatedInstitutionList = [RelatedInstitutionToAPI[selectedOrg]];
+    }
+    if (selectedTarget) {
+      params.supportTargetList = [SupportTargetToAPI[selectedTarget]];
+    }
+
+    return params;
   }, [selectedOrg, selectedRegion, selectedIndustry, selectedTarget]);
+
+  const { data: announcements = [], isLoading, isError } = useAnnouncements(apiParams);
+
+  const filteredData = useMemo(() => {
+    return announcements;
+  }, [announcements]);
 
   const TOTAL_PAGES = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
 
@@ -119,16 +145,24 @@ export default function Announcement() {
 
       <S.Divider />
 
-      <S.CardGrid>
-        {currentData.map((announcement) => (
-          <AnnouncementCard
-            key={announcement.id}
-            title={announcement.title}
-            period={announcement.period}
-            categories={announcement.categories}
-          />
-        ))}
-      </S.CardGrid>
+      {isLoading ? (
+        <S.LoadingMessage>로딩 중...</S.LoadingMessage>
+      ) : isError ? (
+        <S.ErrorMessage>데이터를 불러오는데 실패했습니다.</S.ErrorMessage>
+      ) : currentData.length === 0 ? (
+        <S.EmptyMessage>검색 결과가 없습니다.</S.EmptyMessage>
+      ) : (
+        <S.CardGrid>
+          {currentData.map((announcement, index) => (
+            <AnnouncementCard
+              key={announcement.pbancSn || announcement.pbancId || index}
+              title={announcement.pbancNm}
+              period={announcement.aplyPd}
+              categories={announcement.rcrtTypeCdNm.split('/')}
+            />
+          ))}
+        </S.CardGrid>
+      )}
 
       {TOTAL_PAGES > 0 && (
         <S.Pagination>

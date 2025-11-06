@@ -1,0 +1,61 @@
+export const RegionToAPI: Record<string, string> = {
+  '서울': 'SEOUL',
+  '부산': 'BUSAN',
+  '대구': 'DAEGU',
+  '인천': 'INCHEON',
+  '광주': 'GWANGJU',
+  '대전': 'DAEJEON',
+  '울산': 'ULSAN',
+  '세종': 'SEJONG',
+  '경기': 'GYEONGGI',
+  '강원': 'GANGWON',
+  '충북': 'CHUNGBUK',
+  '충남': 'CHUNGNAM',
+  '전북': 'JEONBUK',
+  '전남': 'JEONNAM',
+  '경북': 'GYEONGBUK',
+  '경남': 'GYEONGNAM',
+  '제주': 'JEJU',
+};
+
+export const RelatedInstitutionToAPI: Record<string, string> = {
+  '고용노동부': 'EMPLOYMENT_LABOR',
+  '과학기술정보통신부': 'SCIENCE_TECH',
+  '농림축산식품부': 'AGRICULTURE',
+  '산업통상자원부': 'INDUSTRY_TRADE',
+  '중소벤처기업부': 'SME_STARTUPS',
+  '해양수산부': 'OCEAN_FISHERIES',
+};
+
+export const IndustryTypeToAPI: Record<string, string> = {
+  '제조업': 'MANUFACTURING',
+  '도소매업': 'WHOLESALE_RETAIL',
+  '숙박 및 음식점업': 'ACCOMMODATION_FOOD',
+  '건설업': 'CONSTRUCTION',
+  '운수업': 'TRANSPORTATION',
+  '부동산업 및 임대업': 'REAL_ESTATE_RENTAL',
+  '전문, 과학 및 기술 서비스업': 'PROFESSIONAL_SCIENCE_TECH',
+  '사업시설관리 및 사업지원 서비스업': 'BUSINESS_FACILITIES',
+  '교육 서비스업': 'EDUCATION',
+  '보건업 및 사회복지 서비스업': 'HEALTH_SOCIAL',
+  '예술, 스포츠 및 여가관련 서비스업': 'ARTS_SPORTS_LEISURE',
+  '협회 및 단체, 수리 및 기타 개인 서비스업': 'ASSOCIATIONS_REPAIR',
+  '농업, 임업 및 어업': 'AGRICULTURE_FORESTRY_FISHERIES',
+  '광업': 'MINING',
+  '전기, 가스, 증기 및 수도사업': 'UTILITIES',
+  '하수·폐기물 처리, 원료재생 및 환경복원업': 'WASTE_MANAGEMENT',
+  '정보통신업': 'INFORMATION_COMMUNICATION',
+  '금융 및 보험업': 'FINANCE_INSURANCE',
+  '출판, 영상, 방송통신 및 정보서비스업': 'PUBLISHING_BROADCASTING',
+  '공공행정, 국방 및 사회보장 행정': 'PUBLIC_ADMIN',
+  '가구내 고용활동 및 달리 분류되지 않은 자가소비 생산활동': 'HOUSEHOLD_ACTIVITIES',
+};
+
+export const SupportTargetToAPI: Record<string, string> = {
+  '소상공인': 'SMALL_BUSINESS_OWNER',
+  '소공인': 'SMALL_MANUFACTURER',
+  '중소기업': 'SME',
+  '예비창업자': 'PROSPECTIVE_ENTREPRENEUR',
+  '1인 창조기업': 'ONE_PERSON_CREATIVE',
+  '사회적경제기업': 'SOCIAL_ECONOMY',
+};
