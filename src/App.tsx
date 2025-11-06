@@ -1,10 +1,11 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Home from '@/pages/home';
-import Announcement from '@/pages/announcement';
-import Header from './components/header';
-import Create from '@/pages/create';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Home from "@/pages/home";
+import Announcement from "@/pages/announcement";
+import Header from "./components/header";
+import Create from "@/pages/create";
+import CreatePoster from "@/pages/createPoster";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/announcement" element={<Announcement />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/createPoster" element={<CreatePoster />} />
         <Route path="/my" element={<div>내 가게</div>} />
         <Route path="*" element={<div>Not found</div>} />
       </Routes>
@@ -23,7 +25,7 @@ export default function App() {
         hideProgressBar={false}
         closeOnClick
         draggable
-        style={{ top: '80px' }}
+        style={{ top: "80px" }}
       />
     </BrowserRouter>
   );
