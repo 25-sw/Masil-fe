@@ -12,6 +12,7 @@ type Props = {
   posterImgRef: RefObject<HTMLImageElement | null>;
   snsImgRef: RefObject<HTMLImageElement | null>;
   onSuggestClick: () => void;
+  posterSrc?: string;
 };
 
 export function PosterPreview({
@@ -22,8 +23,10 @@ export function PosterPreview({
   posterImgRef,
   snsImgRef,
   onSuggestClick,
+  posterSrc,
 }: Props) {
   const isSNS = displayMode === "sns";
+  const posterSrcToUse = posterSrc ?? posterImage;
 
   return (
     <S.PosterColumn>
@@ -33,7 +36,7 @@ export function PosterPreview({
             {posterState === "ready" && (
               <S.PosterImage
                 ref={posterImgRef}
-                src={posterImage}
+                src={posterSrcToUse}
                 alt="포스터 미리보기"
               />
             )}
@@ -47,34 +50,34 @@ export function PosterPreview({
         ) : (
           <S.PosterImage ref={snsImgRef} src={instaImg} alt="SNS 미리보기" />
         )}
-      </S.CanvasArea>
-      <S.SuggestionButton
-        type="button"
-        onClick={onSuggestClick}
-        aria-label={isSNS ? "SNS 업로드" : "문구 추천"}
-      >
-        <span>{isSNS ? "SNS 업로드" : "문구 추천"}</span>
-        <svg
-          width="18"
-          height="15"
-          viewBox="0 0 18 15"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="none"
+        <S.SuggestionButton
+          type="button"
+          onClick={onSuggestClick}
+          aria-label={isSNS ? "SNS 업로드" : "문구 추천"}
         >
-          <path
-            d="M17 7.33404L1 7.33404L17 7.33404ZM10.1429 13.6681L17 7.33404L10.1429 13.6681ZM10.1429 1L17 7.33404L10.1429 1Z"
-            fill="white"
-          />
-          <path
-            d="M17 7.33404L0.999999 7.33404M17 7.33404L10.1429 13.6681M17 7.33404L10.1429 1"
-            stroke="white"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </S.SuggestionButton>
+          <span>{isSNS ? "SNS 업로드" : "문구 추천"}</span>
+          <svg
+            width="18"
+            height="15"
+            viewBox="0 0 18 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M17 7.33404L1 7.33404L17 7.33404ZM10.1429 13.6681L17 7.33404L10.1429 13.6681ZM10.1429 1L17 7.33404L10.1429 1Z"
+              fill="white"
+            />
+            <path
+              d="M17 7.33404L0.999999 7.33404M17 7.33404L10.1429 13.6681M17 7.33404L10.1429 1"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </S.SuggestionButton>
+      </S.CanvasArea>
     </S.PosterColumn>
   );
 }

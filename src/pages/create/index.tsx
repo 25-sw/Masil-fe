@@ -17,6 +17,10 @@ export default function Create() {
     navigate("/createPoster");
   };
 
+  const handleSelectPoster = (posterSrc: string) => {
+    navigate("/createPoster", { state: { posterSrc } });
+  };
+
   return (
     <S.Wrapper>
       <S.Title>AI를 사용해 새로운 홍보 포스터 만들기</S.Title>
@@ -27,7 +31,11 @@ export default function Create() {
         </S.AddPosterCard>
 
         {posters.map((poster, index) => (
-          <S.PosterCard key={index}>
+          <S.PosterCard
+            key={index}
+            onClick={() => handleSelectPoster(poster)}
+            style={{ cursor: "pointer" }}
+          >
             <img src={poster} alt={`포스터 ${index + 1}`} />
           </S.PosterCard>
         ))}
